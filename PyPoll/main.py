@@ -1,4 +1,4 @@
-#imports modules
+#import modules
 import os
 import csv
 
@@ -10,11 +10,14 @@ vote_count3 = 0
 vote_count4 = 0
 candidates = []
 candidate_name = []
-candidate_vote = []
+vote = []
+percent = []
 
+#open the csv file
 csvpath = os.path.join('..','Resources','election_data.csv')
 
 with open(csvpath) as csvfile:
+    # CSV reader specifies delimiter and variable that holds contents
     csvreader = csv.reader(csvfile,delimiter=",")
     csv_header = next(csvreader, None)
     
@@ -30,7 +33,7 @@ with open(csvpath) as csvfile:
     #put individual names into a list
     for name in candidates:
         if name not in  candidate_name:
-                candidate_name.append(name)
+            candidate_name.append(name)
         
         #count the votes for each candidate
         if name == candidate_name[0]:
@@ -45,7 +48,7 @@ with open(csvpath) as csvfile:
     #put votes in a list        
     vote = [vote_count1,vote_count2,vote_count3,vote_count4]
 
-    #find the winner
+    #find the winner: winner is the index of candidate with most votes
     most_votes = max(vote)
     winner = vote.index(most_votes)
 
@@ -58,9 +61,7 @@ with open(csvpath) as csvfile:
     percent = [percent_1,percent_2,percent_3,percent_4]    
 
 
-
-
-#cand = dict(zip(list(candidates),[list(candidates).count(i) for i in list(candidates)]))
+#print to the terminal
 print("Election Results")
 print("--------------------------")
 print(f"Total Votes: {total_votes}")
@@ -73,7 +74,7 @@ print("--------------------------")
 print(f"Winner: {candidate_name[winner]}")
 print("--------------------------")
 
- #Specify the file to write to
+#Specify the file to write to
 output_path = os.path.join("..", "analysis", "Election_results.txt")
 
 # Open the file using "write" mode. Specify the variable to hold the contents
